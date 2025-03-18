@@ -1,19 +1,26 @@
 const express = require('express');
-const app = express();
-const path = require('path');
 require('dotenv').config();
 
+const configViewEngine = require('./config/viewEngine');
+const webRoutes = require('./routes/web');
 
-
+const app = express();
 const hostname = process.env.HOST_NAME;
 const port = process.env.PORT;
 
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs');
 
-app.get('/', (req, res) => {
-  res.render('sample.ejs')
-})
+app.use(express.json()); // parse dữ liệu JSON trong body của request (req.body).
+
+// Dùng để xử lý dữ liệu từ form HTML
+// Nếu người dùng gửi dữ liệu qua form, Express sẽ tự động chuyển thành JavaScript object.
+// extended: false -> Chỉ hỗ trợ chuỗi hoặc mảng đơn giản.
+// extended: true -> Hỗ trợ object lồng nhau.
+app.use(express.urlencoded({ extended: true }))
+
+configViewEngine(app);
+app.use('/test', webRoutes); // sử dụng router
+
+
 
 app.listen(port, hostname, () => {
   console.log(`Example app listening on http://${hostname}:${port}/`)
