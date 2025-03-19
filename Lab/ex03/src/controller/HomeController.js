@@ -38,6 +38,10 @@ const gethandle = (req, res) => {
     res.render('create.ejs');
 };
 
+const getUpdate = (req, res) => {
+    res.render('edit.ejs');
+}; 
+
 // Định nghĩa một hàm xử lý yêu cầu HTTP POST.
 // req: Đối tượng chứa dữ liệu yêu cầu từ client.
 // res: Đối tượng để gửi phản hồi về cho client.
@@ -80,4 +84,5 @@ module.exports = {
     gethandleLinkD,
     postCreateUser,
     gethandle,
+    getUpdate,
 };
