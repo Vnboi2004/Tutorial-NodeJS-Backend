@@ -1,6 +1,6 @@
 const { query } = require('express');
 const connection = require('../config/database');
-const { getAllUsers } = require('../service/CRUDService');
+const { getAllUsers, getUserById } = require('../service/CRUDService');
 
 const getHandleLink = (req, res) => {
     let users = [];
@@ -38,8 +38,10 @@ const gethandle = (req, res) => {
     res.render('create.ejs');
 };
 
-const getUpdate = (req, res) => {
-    res.render('edit.ejs');
+const getUpdate = async (req, res) => {
+    const userId = req.params.id;
+    let results = await getUserById(userId);
+    res.render('edit.ejs', {userEdit: results});
 }; 
 
 // Định nghĩa một hàm xử lý yêu cầu HTTP POST.

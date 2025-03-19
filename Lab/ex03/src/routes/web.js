@@ -8,6 +8,6 @@ const router = express.Router(); // Khởi tạo các tuyến riêng biệt.
 // router.get('/link', getHandleLink);
 router.get('/', gethandleLinkD);
 router.get('/create', gethandle);
-router.get('/update', getUpdate);
+router.get('/update/:id', getUpdate);
 router.post('/create-user', postCreateUser);
 module.exports = router;
