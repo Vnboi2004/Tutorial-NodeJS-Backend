@@ -36,27 +36,26 @@
             color: white;
         }
 
-        .form-add-new {
-            width: 500px;
-            margin: 0 auto;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
         }
 
-        .input-group {
-            padding: 10px;
+        td,
+        th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
         }
 
-        .btn {
-            display: flex;
-            justify-content: center;
-            padding: 8px 0;
+        tr:nth-child(even) {
+            background-color: #dddddd;
         }
 
-        .btn button {
-            padding: 4px 12px;
+        .title {
+            text-align: center;
+            padding: 24px;
         }
     </style>
 </head>
@@ -64,31 +63,39 @@
 <body>
     <div class="topnav">
         <a href="#home" class="active">Home</a>
-        <a href="#news">News</a>
-        <a href="#contact">Contact</a>
-        <a href="#about">About</a>
+        <a href="/create-user">Create User</a>
     </div>
-    <div class="form-add-new">
-        <form action="/test/create-user" method="POST">
-            <fieldset>
-                <legend>Add new users</legend>
-                <div class="input-group">
-                    <label for="">Email: </label>
-                    <input type="text" name="email">
-                </div>
-                <div class="input-group">
-                    <label for="">Name: </label>
-                    <input type="text" name="fullName">
-                </div>
-                <div class="input-group">
-                    <label for="">City: </label>
-                    <input type="text" name="city">
-                </div>
-                <div class="btn">
-                    <button>Save</button>
-                </div>
-            </fieldset>
-        </form>
+    <div class="table-container">
+        <h1 class="title">List users</h1>
+        <table>
+            <tr>
+                <th>Id</th>
+                <th>Email</th>
+                <th>Name</th>
+                <th>City</th>
+                <th>Actions</th>
+            </tr>
+            <% for (let i=0; i < listUsers.length; i++ ) { %>
+                <tr>
+                    <td>
+                        <%= listUsers[i].Id %>
+                    </td>
+                    <td>
+                        <%= listUsers[i].Email %>
+                    </td>
+                    <td>
+                        <%= listUsers[i].Name %>
+                    </td>
+                    <td>
+                        <%= listUsers[i].City %>
+                    </td>
+                    <td>
+                        <button>Edit</button>
+                        <button>Delete</button>
+                    </td>
+                </tr>
+                <% } %>
+        </table>
     </div>
 </body>
 

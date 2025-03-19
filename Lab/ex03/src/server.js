@@ -18,7 +18,7 @@ app.use(express.json()); // parse dữ liệu JSON trong body của request (req
 app.use(express.urlencoded({ extended: true }))
 
 configViewEngine(app);
-app.use('/test', webRoutes); // sử dụng router
+app.use(webRoutes); // sử dụng router
 
 
 
