@@ -1,6 +1,6 @@
 const { query } = require('express');
 const connection = require('../config/database');
-const { getAllUsers, getUserById, updateUserById  } = require('../service/CRUDService');
+const { getAllUsers, getUserById, updateUserById, deleteUserById } = require('../service/CRUDService');
 
 const getHandleLink = (req, res) => {
     let users = [];
@@ -80,6 +80,19 @@ const postUpdateUser = async (req, res) => {
 };
 
 
+const postDeleteUser = async (req, res) => {
+    const userId = req.params.id;
+    let results = await getUserById(userId);
+    // let { id } = req.body;
+    // await deleteUserById(id);
+    res.render('delete.ejs', {userDelete: results});
+};
+
+const postHandleDeleteUser = async (req, res) => {
+    let  id  = req.body.id;
+    await deleteUserById(id);
+    res.redirect('/');
+};
 
 
 module.exports = {
@@ -92,4 +105,6 @@ module.exports = {
     gethandle,
     getUpdate,
     postUpdateUser,
+    postDeleteUser,
+    postHandleDeleteUser,
 };
