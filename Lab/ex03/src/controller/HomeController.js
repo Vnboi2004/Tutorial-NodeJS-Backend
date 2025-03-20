@@ -1,6 +1,6 @@
 const { query } = require('express');
 const connection = require('../config/database');
-const { getAllUsers, getUserById } = require('../service/CRUDService');
+const { getAllUsers, getUserById, updateUserById  } = require('../service/CRUDService');
 
 const getHandleLink = (req, res) => {
     let users = [];
@@ -49,7 +49,6 @@ const getUpdate = async (req, res) => {
 // res: Đối tượng để gửi phản hồi về cho client.
 const postCreateUser = async (req, res) => { 
     let { email, fullName, city } = req.body;
-
     // ?: Placeholder để tránh lỗi SQL Injection.
     // [email, fullName, city]: Mảng chứa dữ liệu sẽ thay thế ?.
     // connection.query(
@@ -72,7 +71,12 @@ const postCreateUser = async (req, res) => {
         [email, fullName, city]
     );
     res.send("Create account success!");
+};
 
+const postUpdateUser = async (req, res) => { 
+    let { id, email, fullName, city } = req.body;
+    await updateUserById(id, email, fullName, city);
+    res.redirect('/');
 };
 
 
@@ -87,4 +91,5 @@ module.exports = {
     postCreateUser,
     gethandle,
     getUpdate,
+    postUpdateUser,
 };

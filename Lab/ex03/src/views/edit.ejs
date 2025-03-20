@@ -49,6 +49,10 @@
             padding: 10px;
         }
 
+        .input-hidden {
+            display: none;
+        }
+
         .btn {
             display: flex;
             justify-content: center;
@@ -67,9 +71,13 @@
         <a href="/create">Create user</a>
     </div>
     <div class="form-add-new">
-        <form action="/create-user" method="POST">
+        <form action="/update-user" method="POST">
             <fieldset>
                 <legend>Edit new users</legend>
+                <div class="input-hidden">
+                    <label for="">Id: </label>
+                    <input type="text" name="id" value="<%= userEdit.Id %>">
+                </div>
                 <div class="input-group">
                     <label for="">Email: </label>
                     <input type="text" name="email" value="<%= userEdit.Email %>">
